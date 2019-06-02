@@ -15,7 +15,7 @@ def zip_dirs(zipFile, directory):
 
 print("-- Building FAExtender extension --")
 
-with zipfile.ZipFile("faextender_le.xpi", "w", compression=zipfile.ZIP_DEFLATED) as xpiFile:
+with zipfile.ZipFile("XPI/faextender_le.xpi", "w", compression=zipfile.ZIP_DEFLATED) as xpiFile:
 	zip_dirs(xpiFile, "src")
 
 print("Complete!")
