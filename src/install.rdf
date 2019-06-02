@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#" xmlns:NC="http://home.netscape.com/NC-rdf#" xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	<RDF:Description RDF:about="urn:mozilla:install-manifest"
-		em:name="FurAffinity Extender"
-		em:id="faextender@neocodenetworks.com"
-		em:version="2.2.6.2"
-		em:description="Add browsing features to FurAffinity like easy image downloading, opening galleries in tabs, and more."
-		em:creator="AndrewNeo"
-		em:homepageURL="http://andrewneo.github.com/faextender/"
+		em:name="FurAffinity Extender (LS)"
+		em:id="ascenci.space@lick.blue"
+		em:version="1.0.3"
+		em:description="Add browsing features to FurAffinity like easy image downloading, opening galleries in tabs, and more, while maintaining the power provided by legacy XUL addons. 100% INCOMPATIBLE with Mozilla Firefox after 57.0! :D"
+		em:creator="Xial Lunashine"
+		em:homepageURL="https://ae.ascenci.space/faextender/"
 		em:optionsURL="chrome://faextender/content/Settings.xul"
 		em:iconURL="resource://faextender/icon.png"
 		em:type="2">
@@ -15,5 +15,5 @@
 	<RDF:Description RDF:about="rdf:#$vlwPh1"
 		em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
 		em:minVersion="3.6"
-		em:maxVersion="50.*" />
+		em:maxVersion="57.*" />
 </RDF:RDF>

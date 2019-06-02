@@ -13,9 +13,9 @@ def zip_dirs(zipFile, directory):
 			archiveName = os.path.join(archiveRoot, file)
 			zipFile.write(fullPath, archiveName, zipfile.ZIP_DEFLATED)
 
-print "-- Building FAExtender extension --"
+print("-- Building FAExtender extension --")
 
-with zipfile.ZipFile("faextender.xpi", "w", compression=zipfile.ZIP_DEFLATED) as xpiFile:
+with zipfile.ZipFile("faextender_le.xpi", "w", compression=zipfile.ZIP_DEFLATED) as xpiFile:
 	zip_dirs(xpiFile, "src")
 
-print "Complete!"
+print("Complete!")

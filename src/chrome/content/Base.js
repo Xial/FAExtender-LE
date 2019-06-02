@@ -16,32 +16,32 @@ com.neocodenetworks.faextender.Base = {
 		if (jQueryEnv.window.jQuery) {
 			return jQueryEnv.window.jQuery;
 		}
-		
+
 		// Components.utils.import("resource://faextender/jquery.min.js", jQueryEnv); // This doesn't work for some reason
-		var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);  
+		var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 		loader.loadSubScript("resource://faextender/jquery.min.js", jQueryEnv);
-		
+
 		var jQuery = jQueryEnv.window.jQuery;
-		
+
 		// Make sure jQuery was actually loaded
 		if (jQuery == null) {
 			com.neocodenetworks.faextender.Base.logError("Unable to load jQuery!");
 			return null;
 		}
-		
+
 		// Enable no conflict mode
 		jQuery.noConflict();
-		
+
 		// Return jQuery object
 		return jQuery;
 	},
-	
+
 	loadjQueryHotkeys: function(doc) {
 		// Inject into the jQuery library
 		var jQueryEnv = { jQuery: com.neocodenetworks.faextender.Base.getjQuery(doc) };
 
 		// Load script
-		var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);  
+		var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
 		loader.loadSubScript("resource://faextender/jquery.hotkeys.js", jQueryEnv);
 	},
 
@@ -54,7 +54,7 @@ com.neocodenetworks.faextender.Base = {
 	checkDomain: function(doc) {
 		var loc = doc.location;
 		if (!loc) return false;
-		
+
 		// Check domain
 		return (loc.hostname.indexOf("furaffinity.net") > -1);
 	},
@@ -63,22 +63,22 @@ com.neocodenetworks.faextender.Base = {
 	checkLocation: function(doc, allowed) {
 		var loc = doc.location;
 		if (!loc) return false;
-		
+
 		if (!(allowed instanceof Array)) {
 			allowed = [allowed];
 		}
-		
+
 		// Check each allowed path
 		for (var i = 0; i < allowed.length; i++) {
 			var path = allowed[i];
 			if (loc.pathname.indexOf(path) == 0) return true;
 		}
-		
+
 		return false;
 	},
 
 	getDownloadLink: function(doc, jQuery) {
-		var downloadLink = jQuery("#page-submission div.actions>b>a:contains('Download')");
+		var downloadLink = jQuery("#page-submission div.actions a:contains('Download')");
 		if (downloadLink.length == 0) {
 			// No download at all
 			com.neocodenetworks.faextender.Base.logError("Could not find download link");
@@ -96,12 +96,12 @@ com.neocodenetworks.faextender.Base = {
 	},
 
 	getArtistLink: function(doc, jQuery) {
-		var artistLink = jQuery("#page-submission table.maintable td.cat>a[href*='/user/']");
+		var artistLink = jQuery("#page-submission table.maintable td.cat div.information a[href*='/user/']");
 		if (artistLink.length == 0) {
 			// Can't find artist link
 			com.neocodenetworks.faextender.Base.logError("Could not find artist selector");
 			return null;
-		} 
+		}
 
 		return artistLink;
 	},
@@ -114,7 +114,7 @@ com.neocodenetworks.faextender.Base = {
 		}
 
 		var components = downloadLink[0];
-		
+
 		var url = components.href;
 		var path = components.pathname;
 
@@ -152,20 +152,20 @@ com.neocodenetworks.faextender.Base = {
 
 		var consoleService = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
 		consoleService.logStringMessage("FAExtender debug: " + msg);
-		
+
 		if (obj) consoleService.logStringMessage(obj);
 	},
 
 	// List of functions to call
 	targets: [],
-	
+
 	// Register a function to call on page load
 	registerTarget: function(callback, locations) {
 		if (callback == null) {
 			com.neocodenetworks.faextender.Base.logError("Callback registered was null");
 			return;
 		}
-		
+
 		com.neocodenetworks.faextender.Base.targets.push({ "callback": callback, "locations": locations });
 	},
 
@@ -173,13 +173,13 @@ com.neocodenetworks.faextender.Base = {
 	onPageLoad: function(e) {
 		if (e.originalTarget instanceof HTMLDocument) {
 			doc = e.originalTarget;
-			
+
 			// Check domain
 			if (!com.neocodenetworks.faextender.Base.checkDomain(doc)) return;
-			
+
 			// Check targets
 			var targets = com.neocodenetworks.faextender.Base.targets;
-			
+
 			for (var i = 0; i < targets.length; i++) {
 				if (com.neocodenetworks.faextender.Base.checkLocation(doc, targets[i].locations)) {
 					targets[i].callback(doc);

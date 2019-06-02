@@ -10,7 +10,7 @@
 	
 	<spring flex="1" />
 	<html:html style="width: 100%; text-align: center; font-size: x-large;">
-		<html:span style="color: blue; font-size: xx-large; font-weight: bold;">FurAffinity Extender</html:span><html:br />
+		<html:span style="color: blue; font-size: xx-large; font-weight: bold;">FurAffinity Extender (Legacy Edition)</html:span><html:br />
 		<html:br />
 		is now redirecting you to<html:br />
 		<html:a id="redirURL"></html:a><html:br />
